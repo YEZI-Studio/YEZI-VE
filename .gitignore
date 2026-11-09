@@ -1,0 +1,35 @@
+# 运行产物和本机文件，不进仓库
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+logs/
+episodes/
+p2/episodes/
+p2/orchestrator/doctor.json
+*.key
+.env
+
+# 跑片时写进工作树的第三方素材、你自己的配乐、缓存：不进仓库
+p2/assets/*
+!p2/assets/曲库/
+p2/assets/曲库/*
+!p2/assets/曲库/README.md
+!p2/assets/曲库/music/
+p2/assets/曲库/music/*
+!p2/assets/曲库/music/.gitkeep
+*.mp4
+*.mov
+*.webm
+*.mp3
+*.wav
+*.m4a
+*.aac
+*.flac
+p2/chroma/.venv
+p2/chroma/engine/cache/
+p2/chroma/engine/out/
+p2/chroma/engine/logs/
+p2/chroma/engine/assets/fonts/extra/
+p2/chroma/engine/assets/data/blackbody_srgb.*
+p2/notes/

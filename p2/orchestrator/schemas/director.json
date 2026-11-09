@@ -1,0 +1,187 @@
+{
+  "type": "object",
+  "required": [
+    "bible",
+    "beatmap"
+  ],
+  "properties": {
+    "bible": {
+      "type": "object",
+      "required": [
+        "logline",
+        "world",
+        "motif_ladder",
+        "sections_note",
+        "transitions",
+        "ending",
+        "music"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "beatmap": {
+      "type": "object",
+      "required": [
+        "bpm",
+        "bars",
+        "sections",
+        "hits"
+      ],
+      "properties": {
+        "bpm": {
+          "type": "number",
+          "minimum": 60,
+          "maximum": 200
+        },
+        "bars": {
+          "type": "integer",
+          "minimum": 4,
+          "maximum": 40
+        },
+        "sections": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "bars",
+              "energy",
+              "purpose"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^S[0-9]+$"
+              },
+              "name": {
+                "type": "string"
+              },
+              "bars": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "energy": {
+                "enum": [
+                  "low",
+                  "mid",
+                  "high",
+                  "peak"
+                ]
+              },
+              "purpose": {
+                "type": "string"
+              },
+              "color_from": {
+                "type": "string",
+                "description": "这一段的颜色长在哪个东西上（规则树 root.color.do1）"
+              }
+            }
+          }
+        },
+        "hits": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "object",
+            "required": [
+              "bar",
+              "beat",
+              "kind"
+            ],
+            "properties": {
+              "bar": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "beat": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 4
+              },
+              "sub": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 3.99
+              },
+              "kind": {
+                "enum": [
+                  "big",
+                  "small",
+                  "breath",
+                  "drop",
+                  "final"
+                ]
+              },
+              "what": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "hook_1s": {
+          "type": "object",
+          "required": [
+            "bar",
+            "beat"
+          ],
+          "properties": {
+            "bar": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "beat": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4
+            },
+            "sub": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3.99
+            },
+            "what": {
+              "type": "string"
+            }
+          },
+          "description": "第 1 秒的变化（规则树 root.openend.do1）"
+        },
+        "wow_7s": {
+          "type": "object",
+          "required": [
+            "bar",
+            "beat"
+          ],
+          "properties": {
+            "bar": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "beat": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 4
+            },
+            "sub": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 3.99
+            },
+            "what": {
+              "type": "string"
+            }
+          },
+          "description": "7 s 内的王炸：指向 hits 里的一个 big / drop（root.openend.do1）"
+        }
+      }
+    }
+  }
+}

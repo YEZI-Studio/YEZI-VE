@@ -1,0 +1,30 @@
+{
+  "note": "Codex 后端（run_episode.py --backend codex）和生图通道（--imagegen codex）的配置。不动 config.json。只用你现有的 ChatGPT 登录（默认 CODEX_HOME = ~/.codex），不走 API key。",
+  "bin": "~/.local/bin/codex",
+  "model": null,
+  "effort": null,
+  "note_model": "null = 照 ~/.codex/config.toml 顶层的 model / model_reasoning_effort。因为用了 --ignore-user-config（不加载用户的 MCP、插件、通知钩子），所以编排器把这两项读出来显式传 -m / -c",
+  "disable": ["memories", "plugins", "apps", "multi_agent", "computer_use", "browser_use"],
+  "config": ["web_search=\"disabled\"", "agents.max_threads=1", "skills.include_instructions=false"],
+  "sandbox_read": "job",
+  "note_sandbox_read": "job（默认）= 不用 -s，改用命令行里临时定义的权限档 p2：盘根不可读，只放行系统最小集、Homebrew / 系统字体、uv 的 Python、codex 自己，加上这一次要的目录（代理 = 这一镜 job 的 allow_read：引擎副本、引擎素材 / 工具、实拍和生图目录、~/.local/bin、引擎 venv；问答 = 临时空目录；生图 = ~/.codex/generated_images）；HOME、别的集、编排器代码读不到；/tmp 不可读写、网络关。all = 旧写法（-s read-only / workspace-write，能读整个磁盘）",
+  "note_flags": "每次 codex exec 都加：--skip-git-repo-check --ephemeral --ignore-user-config --ignore-rules --json；disable / config 里的项照抄成 --disable / -c（feature 名写错 codex 会报错退出）",
+  "stages": {},
+  "note_stages": "按环节覆盖思考档位，例如 {\"review\": {\"effort\": \"high\"}}；环节名 = topic director shotlist sample_review keyframe_review review",
+  "qa": {"timeout_s": 2400, "transient_retries": 2, "retry_wait_s": [20, 90]},
+  "agent": {
+    "timeout_min": {"keyframe": 60, "shot": 90, "fix": 60},
+    "max_turns": {"keyframe": 200, "shot": 250, "fix": 150},
+    "effort": null,
+    "note": "预算守卫对 codex 只看轮数（--json 事件流里非 reasoning 的 item 数）和时长；超了就结束进程。effort = null 用上面的 effort"
+  },
+  "imagegen": {
+    "per_shot": 6,
+    "per_film": 40,
+    "effort": "medium",
+    "timeout_s_base": 420,
+    "timeout_s_per_image": 150,
+    "followup": true,
+    "note": "代理写 work/out/images.json → 编排器在沙箱外一次 codex exec + 内置 image_gen（任务书 prompts_codex/imagegen_task.md）→ work/assets/gen/。followup = 生成成功后马上再叫一次代理把图接进去。effort 只管 Codex 写任务的思考档位，图的质量由 image_gen 决定"
+  }
+}

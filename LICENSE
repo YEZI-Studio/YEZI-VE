@@ -1,0 +1,550 @@
+# 严格个人使用许可 1.0（源码可见，非开源）
+# Strict Personal-Use License 1.0 (Source-Available, NOT Open Source)
+
+---
+
+## 中文文本（以中文为准，见第 20.1 条）
+
+### 重要提示
+
+本软件**源码可见，但不是开源软件**。你能看到源码，不等于你可以修改、复制给别人、商用、拿去训练模型或转述其中的规则。**除第 3 条和第 4 条明确允许的事项外，其他一切行为都不允许。** 请在下载、安装、运行或让 AI 代理读取本软件之前完整阅读本许可。第 5 条（禁止事项）、第 12 条（终止）、第 13 条（违约责任）、第 14–15 条（无担保和责任限制）、第 19 条（适用法律和争议解决）与你的权利义务关系重大，请特别注意。
+
+### 第 1 条　定义
+
+1.1 **许可方**：叶子（GitHub：YEZI-Studio；法定姓名见第 21 条），即以本许可提供本软件的人。
+
+1.2 **本软件**：许可方以本许可提供的全部内容，不论形式和载体，包括源代码、编译模块、可执行文件、脚本、配置、提示词和提示词模板、任务书模板、schema、文档、图片、数据，以及它们的任何部分、更新、补丁和后续版本；也包括许可方通过在线服务（例如授权校验或规则中转服务）提供给你的内容。本软件名为 YEZI-VE（Visual Elevation）。
+
+1.3 **受保护内容**：本软件中的规则和方法性内容，包括但不限于：HANDBOOK 等手册（SKILL.md 里面向用户的安装和运行说明除外：你可以向自己或你的 AI 代理说明这些用法；但 SKILL.md 仍属于本软件，适用第 5.2 条）；规则树、根规则、类型卡、目录卡、系列卡、检查项；提示词、提示词模板、任务书模板；schema；门禁（gates）及其阈值、评分锚点、参考帧、尺子图、校准数据和标定数值；编排流程、环节划分、轮数和停止条件；算法、度量方法及其参数。不论以原文、摘录、翻译、改写、摘要、截图、录屏、口述、图表、由 AI 生成的复述还是其他任何形式出现，都属于受保护内容。SKILL.md、报告（report.md）和本软件运行时显示的信息里出现的环节编号和名称、轮数、停止条件、阈值、评分及其锚点，仍属受保护内容：你可以照着使用和查看，但不得另行整理、公开，或用于第 5 条禁止的任何用途。
+
+1.4 **运行产物**：本软件运行时生成的、除「成片」以外的一切文件和数据，包括但不限于每一集目录里的任务书（TASK.md）、上下文文件（ctx/）、模型调用记录（calls/）、开题和导演文件、节拍表、镜头表、门禁结果、规则树总账（gates_tree.json）、报告、日志、镜头代码、请求文件、本软件自动复制到每一集目录里的引擎副本、渲染参数、缓存和中间视频。运行产物包含或反映受保护内容，视为本软件的一部分。
+
+1.5 **成片**：本软件为你生成的最终视频文件（通常在每一集的 deliver/ 目录下；未通过交付门禁时为 film/with_audio.mp4），以及你为了自己观看或按第 4 条发布而对它做的转码、压缩、裁切。
+
+1.6 **个人非商业使用**：一名自然人为了自己的私人目的使用，例如个人学习、兴趣爱好、私人娱乐、和亲友私下分享，并且在使用当时及之后都不预期任何商业用途。
+
+1.7 **商业使用**：任何直接或间接为了取得经济利益或商业优势的使用，不论是否实际取得收入。第 5.3 条列举的情形都属于商业使用，但商业使用不限于这些情形。
+
+1.8 **衍生作品**：基于本软件或受保护内容的任何修改、改编、翻译、移植、重写、重新组织、扩展、二次创作或其他新作品，包括功能上实质相同的重新实现。
+
+1.9 **AI 代理**：按指令读取、运行、分析或生成内容的任何人工智能模型、智能体、自动化脚本或工具，例如 Claude、Codex、DeepSeek 及其他大语言模型和编程代理。
+
+1.10 **你**：接受本许可的自然人。
+
+1.11 **组织**：任何公司、个体工商户、合伙、工作室、MCN 机构、学校、培训机构、社团、非营利组织、政府机关或其他组织。
+
+1.12 **技术保护措施**：许可方用来控制访问或使用本软件、保护受保护内容的任何技术手段，例如授权校验、设备绑定、签名校验、编译、混淆、加密、在线服务认证。
+
+1.13 **竞品**：与本软件功能相同或相近，或可替代本软件的产品、服务、工具、规则集、模板、课程或模型，不论是否收费。
+
+1.14 **第三方材料**：不属于许可方、由第三方按其自身条款提供的组件、字体、音乐、视频素材、软件和服务，见 NOTICE.md。
+
+1.15 **官方渠道**：https://github.com/YEZI-Studio/YEZI-VE （许可方在 GitHub 上的官方仓库）。
+
+### 第 2 条　接受本许可
+
+2.1 你只有同意本许可全部条款，把它们作为你取得任何许可的严格义务和条件，才能取得本许可下的任何许可。
+
+2.2 自加入首次运行确认的版本起，本软件首次运行时会显示本许可的要点，并要求你明确点击或输入「同意」；完成这一步之前，你不得运行本软件。「同意」必须由你本人做出，不得由 AI 代理、脚本或他人代为点击或输入。此外，你下载、安装、复制、运行、读取本软件，或指示 AI 代理做上述任何一件事，也表示你已同意本许可。不同意的，不得做上述任何一件事。
+
+2.3 你须是具有完全民事行为能力的自然人；未成年人须经监护人同意并由监护人监督遵守本许可。你不得代表组织接受本许可。
+
+2.4 你只能从官方渠道获取本软件。从其他任何来源得到的副本，不取得本许可下的任何许可。
+
+2.5 官方渠道是 GitHub 上的公开仓库。GitHub 服务条款允许其他 GitHub 用户在 GitHub 站内查看和 fork 公开仓库；这是 GitHub 平台的功能，不是许可方授予的许可。fork 或以其他方式复制出来的副本，不是从官方渠道获取的副本，不取得本许可下的任何许可；在 GitHub 站内查看源码，也不允许你做第 3 条和第 4 条以外的任何事。
+
+### 第 3 条　唯一允许的使用（许可授予）
+
+3.1 在你持续遵守本许可全部条款的前提下，许可方授予你一项个人的、非独占的、不可转让、不可分许可、可撤销的有限许可，**只允许你**：
+
+(a) 从官方渠道获取本软件，并安装在你本人拥有并实际控制、只由你本人使用的最多 2 台实体设备上（每个虚拟机、容器、系统镜像或克隆都另算一台，并受第 5.15 条约束）；
+
+(b) 按 SKILL.md 和随附文档描述的方式，**原样**运行本软件（包括通过 AI 代理运行），为你自己生成成片。本软件按设计会由 AI 代理在每一集目录里生成镜头代码、上下文文件（ctx/）、任务书和请求文件，并复制引擎副本；这些都属于运行产物，不视为第 5.1 条所说的修改、插件或衍生作品，但只能由本软件在这一集的运行和续跑中使用；
+
+(c) 为运行本软件的目的，让本软件把运行所需的内容（包括提示词、规则片段、任务书和运行产物）发送给你自行选择并自行负责的模型服务或工具（例如 DeepSeek API、Codex、Claude Code），并在你的设备上读取运行所必需的文件。该服务提供「不用你的数据训练或改进模型」之类选项的，你必须选择不允许。**安全港：**只要你已按前一句做出选择（该服务没有这类选项的，无需选择），本软件按本项发送的内容，以及该服务按其自身条款对这些内容所做的处理（包括保存、审核和训练），不视为你违反第 4.4、5.5、5.6、5.7、5.16 条，也不导致本许可终止。安全港只覆盖本软件为运行自身所做的发送，不覆盖你另行发送、粘贴或上传的任何内容；
+
+(d) 只通过 SKILL.md 列明的方式调整运行：命令行参数、环境变量、每一集的输入文件（例如 inputs/music.json、意见文件），以及 SKILL.md 明确说明用户可以改的配置项。这些调整不视为修改本软件；
+
+(e) 为备份目的保留一份副本，该副本同样受本许可约束，并计入第 3.1(a) 条的设备数量；
+
+(f) 让你按第 3.1(b) 条运行本软件时使用的 AI 代理读取运行产物，并向你本人转述本次运行的结论（例如成片路径、报告中关于本集的结论、进度、日志、报错和停机原因）。转述只供你本人查看，以说明本次运行结果所需为限；AI 代理为此读取的内容按第 3.1(c) 条处理。按本项向你本人转述，不视为违反第 5.6 条；但不得借此整理、导出或重建受保护内容。
+
+3.2 第 3.1 条的每一项都必须同时属于个人非商业使用。
+
+3.3 **除本条和第 4 条明确允许的事项外，许可方没有授予你任何其他权利；本许可没有明确允许的行为，一律不允许。**
+
+### 第 4 条　成片的使用范围
+
+4.1 在你遵守本许可的前提下，你可以：
+
+(a) 保存、观看你的成片；
+
+(b) 私下发给亲友观看；
+
+(c) 发布到你本人名下的个人社交媒体账号，但必须同时满足：该成片本身不产生任何直接或间接收入（不挂广告收益、不参加平台创作激励或流量分成计划、不收打赏、不带货、不接商单、不做品牌推广或软广、不为任何收费产品或服务引流）；平台无法把该成片排除在变现之外的，未经许可方书面许可不得在该平台发布。
+
+4.2 发布成片时，你必须：
+
+(a) 遵守成片中第三方材料的条款，包括在视频简介里按要求贴出配乐署名（例如 NCS 曲目的 credit 原文），以及给按 CC BY 授权的素材作者署名（见 NOTICE.md 和每一集的报告）；
+
+(b) 不表示、不暗示该成片由许可方制作、属于许可方的作品或系列（例如 CHROMA），或得到许可方认可；不得用许可方的姓名、昵称（含「叶子」及其拼音 yezi / YEZI）、品牌（含 YEZI-Studio）、系列名或本软件名称（YEZI-VE）作为成片或你的系列的名称；
+
+(c) 可以但不必写一行事实性说明，例如「使用 YEZI-VE 制作」。
+
+4.3 对成片，你不得：
+
+(a) 作任何商业使用（含第 5.3 条列举的全部情形）；
+
+(b) 用于第 5.5 条禁止的任何训练或数据用途；
+
+(c) 作为素材、模板、样片或素材包出售、出租、许可或分发；
+
+(d) 用于第 5.13 条禁止的任何违法或有害用途。
+
+4.4 运行产物只能保存在你按第 3.1(a) 条安装本软件的设备上，供你本人查看；除了向许可方报告问题、本软件按第 3.1(c) 条为运行自身发给你选择的模型服务或工具、以及按第 3.1(f) 条由你的 AI 代理向你本人转述以外，不得向任何人披露、展示或分发。
+
+4.5 许可方不主张成片本身的著作权，但这不扩大你对本软件或受保护内容的任何权利，也不改变第三方材料的权利归属。成片中的第三方材料仍归其权利人所有，由你负责合规使用。
+
+4.6 本许可终止后，你不得再发布新的成片；因违约终止的，许可方要求时，你应当下架违约发布的成片。
+
+### 第 5 条　禁止事项
+
+除第 3 条和第 4 条明确允许的以外，你不得自己、也不得通过他人或 AI 代理做以下任何一件事：
+
+5.1 **修改和衍生。** 修改、改编、翻译、移植（例如移植到其他语言、框架、渲染引擎、模型或平台）、重写、补丁、扩展、二次创作本软件或受保护内容，或制作任何衍生作品；也包括编写会改变本软件行为的插件、钩子、包装层，以及照着本软件做一份功能实质相同的重新实现。
+
+5.2 **分发、转售、托管和捆绑。** 复制给他人、再分发、出售、转售、出租、出借、分许可、转让本软件或其任何部分；上传到任何代码仓库、网盘、群文件、论坛、镜像站或模型平台；把本软件托管为在线服务、API、机器人、代做平台或供他人使用的任何形式；把本软件打包、捆绑或集成进其他产品、模板、素材包、工具包、课程或服务；多人共用一份安装。
+
+5.3 **商业使用。** 对本软件、受保护内容、运行产物或成片作任何商业使用，包括但不限于：
+(a) 为客户、雇主或任何第三方制作视频，包括免费试做、比稿、样片（不论是否收费、是否算商业使用，第 5.14 条另行禁止）；
+(b) 接单、代做、外包、众包，或在提供任何收费服务的过程中使用；
+(c) 用于广告收益、平台创作激励、流量分成、打赏、带货、商单、品牌合作、软广或任何形式的推广；
+(d) 用于企业、店铺、品牌或机构账号；
+(e) 用于付费教学、课程、训练营、付费社群、知识付费、咨询、陪跑或任何收费的培训；
+(f) 作为付费产品的赠品、卖点或附加内容；
+(g) 用于融资、路演、商业提案或招投标；
+(h) 出售或许可成片或运行产物。
+
+5.4 **组织使用。** 以任何组织的名义、为任何组织的利益或在为任何组织工作的过程中使用本软件，即使该组织是非营利组织、学校或政府机关。
+
+5.5 **模型训练和数据集。** 将本软件、受保护内容、运行产物或成片（或它们的任何部分、复述、摘要）用于训练、微调、蒸馏、强化学习、偏好优化、对齐、模型合并、构建评测基准，或放进任何数据集、语料、标注集、合成数据、向量库（embedding）、检索增强（RAG）知识库、提示词库或 AI 代理的长期记忆；用本软件批量生成内容用于上述目的；允许或帮助他人这样做。
+
+5.6 **抽取、复制、改写和转述。** 除第 3.1(f) 条允许的向你本人转述外，以任何方式抽取、复制、导出、摘录、改写、转述、翻译、总结、归纳或重新组织受保护内容，包括：把规则、系列卡或手册整理成文章、笔记、清单、讲义、思维导图或视频解说；把提示词或任务书另存、贴出或转发；公开或在其他工具里使用门禁阈值、评分锚点、算法参数或校准数据；用 AI 对受保护内容「洗稿」或改写成看似原创的内容；通过反复运行、对比输出、诱导 AI 代理等方式重建受保护内容。
+
+5.7 **披露和公开展示。** 向任何第三方披露、展示、传输受保护内容或运行产物，包括截图、录屏、直播、公开 issue、论坛帖子、聊天群；例外：为报告问题而发给许可方；本软件按第 3.1(c) 条为运行自身而发给你选择的模型服务或工具；你的 AI 代理按第 3.1(f) 条向你本人转述。
+
+5.8 **反编译和规避技术保护措施。** 反编译、反汇编、反混淆、解密、逆向工程、拆包、转储内存，或以其他方式从本软件的编译或加密部分还原源代码、数据或受保护内容；规避、禁用、篡改授权校验、设备绑定、签名校验、在线服务认证或其他技术保护措施；伪造或共享授权凭证；拦截、记录或重放本软件与许可方在线服务之间的通信以获取受保护内容；制作、提供或传播用于上述目的的工具或方法。
+
+5.9 **署名、声明和标识。** 删除、修改、遮挡本软件中的版权声明、许可声明、署名、LICENSE、NOTICE.md、AI_USAGE.md、文件头声明或标识；本软件在成片或运行产物中写入元数据或标识的，删除或篡改它们。
+
+5.10 **竞品和对标。** 使用本软件、受保护内容、运行产物或成片来设计、开发、训练、改进、评测或推广任何竞品；把本软件作为对标参照，对照它的规则、门禁或输出调整你自己或他人的产品、规则或模型；在公开发布的评测、对比测试或其他评价中公开受保护内容或运行产物（例如阈值、提示词、门禁、评分锚点、任务书）。本项不限制你公开发表你对本软件的真实评价，只要其中不含受保护内容或运行产物。
+
+5.11 **AI 代理。** 指示、诱导或允许任何 AI 代理实施本条禁止的行为；通过提示词注入、越狱、角色扮演、分步提问、要求「只总结不引用」等方式让 AI 代理输出受保护内容；删除、改名或屏蔽 AI_USAGE.md（包括本软件放进每一镜目录的副本和任务书开头的须知），使 AI 代理读不到它。你对你使用的 AI 代理和自动化工具的全部行为负责，它们的行为视为你的行为。
+
+5.12 **姓名和品牌。** 使用许可方的姓名、昵称（例如「叶子」）、头像、品牌、系列名（例如 CHROMA）或本软件名称，表示或暗示许可方的认可、合作或出品；注册与之相同或近似的域名、账号或商标。
+
+5.13 **违法和有害用途。** 用于违法、侵权（包括侵犯第三方的著作权、肖像权、商标权、音乐和素材权利）、欺诈、冒充他人、深度伪造、色情、暴力、仇恨、骚扰或虚假信息；违反你使用的第三方服务（模型服务、素材网站、发布平台）的条款。
+
+5.14 **为他人制作、代跑和演示。** 为任何第三方（包括亲友，也包括免费）制作视频，或替任何人运行本软件、代为跑片；在现场、直播、录屏、教程、分享会或其他任何场合向他人演示本软件的运行过程。不论是否收费、是否算商业使用，都不允许。第 4.1(b)、(c) 条只允许你分享你为自己制作的成片。
+
+5.15 **运行环境和设备上限。** 在云主机、托管服务器、持续集成（CI）环境、远程桌面或远程开发服务，或任何第三方可以访问或控制的设备和环境里安装或运行本软件；用虚拟机、容器、磁盘镜像、系统克隆或类似方式规避第 3.1(a) 条的设备上限。
+
+5.16 **粘贴给在线服务。** 把受保护内容或运行产物（或它们的任何部分、截图、复述、摘要）粘贴、上传或发送给任何在线 AI 聊天、翻译、搜索、笔记、文档协作、代码片段（例如 gist）、pastebin 或类似服务。本软件按第 3.1(c) 条为运行自身所做的发送，以及你的 AI 代理为按第 3.1(f) 条向你本人转述所做的读取，不在此限。
+
+5.17 **AI 代理的配置和记忆。** 把受保护内容或运行产物（或它们的复述、摘要）写进、或让 AI 代理写进任何 AI 代理的配置、指令或记忆，例如 CLAUDE.md、AGENTS.md、记忆（memory）文件、自定义指令、系统提示、项目笔记、交接文件、会话总结。本软件按第 3.1(b) 条在每一集目录里生成的任务书和上下文文件不在此限；只记录运行状态（所在环节、成片和报告的路径、下一步命令、待用户决定的事项）、不含受保护内容及其复述的交接和会话总结，也不在此限。
+
+5.18 **兜底。** 做任何本许可没有明确允许的事。拿不准某个行为是否允许时，按不允许处理，先取得许可方的书面许可。
+
+### 第 6 条　规则资料的特别条款
+
+6.1 受保护内容（包括规则文档、系列卡、提示词、门禁阈值和校准数据）并入本许可，与本软件其他部分一同受本许可约束。
+
+6.2 本软件和受保护内容**不**以任何 Creative Commons 许可或其他开放许可提供，本许可不允许任何转载、分享或公开展示；任何人都不得以开放许可为依据，对本软件或受保护内容主张任何权利。
+
+6.3 许可方可以在规则资料的文件开头加附录 A 的声明。是否加声明，不影响本许可的效力。
+
+6.4 受保护内容中引用的第三方原文，版权归其原作者；本许可约束的是许可方的表达、选择、编排、数值和数据。
+
+### 第 7 条　第三方材料
+
+7.1 第三方材料按其自身条款授权，见 NOTICE.md。本许可不授予你第三方材料的任何权利，也不限制第三方条款给你的权利（例如按 SIL Open Font License 1.1 提供的字体，仍按该许可使用）。
+
+7.2 本软件不随附第三方音乐和视频素材。你按 SKILL.md 自行下载或提供素材和配乐时，由你负责遵守其条款。
+
+7.3 你自行开通、自行付费并遵守你使用的模型服务、命令行工具和平台的条款（例如 DeepSeek、OpenAI / ChatGPT、Anthropic Claude Code、素材网站）。密钥、账号和登录由你本人保管，许可方和本软件不代你保管。
+
+### 第 8 条　技术保护措施和在线服务
+
+8.1 本软件现在或今后可能包含技术保护措施和可选的在线服务（例如授权校验、规则中转）。启用在线服务的版本，会在发布说明中列明传输的数据。目前的版本没有任何在线服务，不向许可方发送任何数据。许可方不通过在线服务收集你的视频、素材、配乐或密钥。
+
+8.2 许可方可以随时修改、暂停或停止在线服务，不承诺可用性。在线服务不可用时本软件可能无法运行。
+
+8.3 本软件会按你的指令连接第三方服务（模型 API、素材网站等）；这些连接由你发起，适用第三方的条款和隐私政策。
+
+### 第 9 条　专利
+
+9.1 许可方授予你一项专利许可，范围仅限于许可方能够许可、且你按第 3 条使用本软件时会侵犯的专利权利要求，只用于第 3 条允许的用途。
+
+9.2 你提出任何书面主张，声称本软件侵犯或帮助侵犯任何专利的，你的专利许可立即终止。
+
+### 第 10 条　法定权利
+
+法律强制规定、不能通过约定排除的权利（例如合理使用、法定许可），本许可不加以限制；但你只能在法律明确允许的最小范围内行使，且不因此取得本许可之外的任何权利。
+
+### 第 11 条　撤销
+
+11.1 本许可是免费授予的。许可方可以随时以书面通知你或在官方渠道公告的方式撤销本许可或停止提供本软件。
+
+11.2 非因你违约而撤销的，你此前按第 4 条合规发布的成片可以保留在原处，但不得再新发布；其他方面适用第 12.3 条。
+
+### 第 12 条　终止
+
+12.1 你违反本许可的任何一条，本许可和你在本许可下的全部许可（包括第 4 条对成片的许可）**立即自动终止**，无需通知，**没有宽限期，也没有补救期**。
+
+12.2 终止后只有许可方以书面方式明确表示恢复，你的许可才能恢复。
+
+12.3 本许可终止或撤销后，你应当立即：停止使用本软件；删除你持有或控制的全部副本，包括备份、编译模块、运行产物，以及 AI 代理工作目录和记忆中的副本；停止发布新的成片；因违约终止的，按许可方的要求下架违约发布的成片；许可方要求时，书面确认已经做到。
+
+12.4 第 1 条、第 4.3 条至第 4.6 条、第 5 条、第 6 条、第 7 条、第 12 条至第 20 条在本许可终止或撤销后继续有效。
+
+### 第 13 条　违约责任
+
+13.1 你违反本许可的，应当赔偿许可方因此受到的全部损失，包括许可方为维权支付的合理开支（律师费、公证费、调查取证费、差旅费等）。
+
+13.2 许可方可以依法申请停止侵害、行为保全、禁令等救济；构成著作权侵权的，许可方可以依法主张法定赔偿或惩罚性赔偿。
+
+13.3 （保留）
+
+### 第 14 条　无担保
+
+**在法律允许的最大范围内，本软件按「现状」提供，不附带任何明示或默示的担保或条件，包括适销性、特定用途适用性、不侵权、准确性和成片质量。**
+
+### 第 15 条　责任限制
+
+**在法律允许的最大范围内，许可方不就本许可或本软件的使用或性质引起的任何损害对你承担责任，不论依据何种法律理由，包括数据丢失、费用（例如模型调用费用）、设备损坏、收入损失和第三方索赔。** 法律规定不得排除的责任（例如造成人身损害的责任，因故意或者重大过失造成财产损失的责任）除外。
+
+### 第 16 条　权利保留和不转让
+
+16.1 本软件和受保护内容的一切权利（包括著作权、专利权、商业秘密和其他知识产权）由许可方保留。本许可只授予第 3 条、第 4 条和第 9 条明确列出的许可，不默示授予任何其他许可。
+
+16.2 你不得分许可或转让你在本许可下的任何许可。本许可不妨碍许可方向他人授予其他许可，包括商业许可。需要商业许可或任何超出本许可的用途，请联系许可方（第 21 条），以双方签署的书面许可为准。
+
+16.3 许可方可以转让本许可下的权利和义务。
+
+### 第 17 条　反馈
+
+你自愿向许可方提出的意见、建议、问题报告，许可方可以无偿、不受限制地使用，无需向你付费或署名。
+
+### 第 18 条　版本和更新
+
+许可方可以发布本许可的新版本。本软件的每个版本适用随该版本提供的许可。你安装或运行更新版本，即表示你同意该版本的许可。
+
+### 第 19 条　适用法律和争议解决
+
+19.1 本许可适用中华人民共和国法律（为本许可之目的，不包括香港特别行政区、澳门特别行政区和台湾地区的法律，也不包括冲突法规范）。因本许可产生的争议，由许可方户籍所在地有管辖权的人民法院管辖。
+
+19.2 此外，许可方也可以在你住所地或侵权行为地有管辖权的法院申请停止侵害、行为保全或禁令。
+
+### 第 20 条　其他
+
+20.1 **语言。** 本许可有中文和英文两种文本。两种文本不一致时，**以中文文本为准**。
+
+20.2 **配套文件。** AI_USAGE.md（给 AI 代理的使用须知）、NOTICE.md（第三方材料清单）、SKILL.md（使用说明）是本许可的配套文件。它们和本许可不一致时，以本许可为准。
+
+20.3 **可分割。** 本许可某一条款全部或部分无效、不可执行的，不影响其他条款的效力；该条款在法律允许的最大范围内按最接近原意的方式执行。
+
+20.4 **不弃权。** 许可方没有行使或延迟行使某项权利，不视为放弃该权利。
+
+20.5 **完整约定。** 本许可（连同配套文件）构成你和许可方之间就本软件的完整约定。只有许可方签署的书面文件才能修改或补充本许可。
+
+20.6 **通知。** 许可方可以通过官方渠道公告、电子邮件或本软件内的提示向你发出通知。
+
+20.7 **标题。** 条款标题只为阅读方便，不影响解释。
+
+### 第 21 条　联系方式
+
+许可方法定姓名：陈子彦。
+
+商业许可、书面许可、问题报告和违规举报：加微信 ian18858863，或在官方仓库 https://github.com/YEZI-Studio/YEZI-VE 提交 Issue。Issue 是公开的：只写诉求，不要贴受保护内容或运行产物（第 5.7 条）。
+
+---
+
+## English Text (the Chinese text prevails; see Section 20.1)
+
+### Important Notice
+
+The Software is **source-available, not open source**. Being able to see the source does not mean you may modify it, give it to anyone, use it commercially, train models on it, or restate its rules. **Everything other than what Sections 3 and 4 expressly allow is prohibited.** Read this License in full before you download, install, run, or let an AI agent read the Software. Pay special attention to Section 5 (Prohibited Acts), Section 12 (Termination), Section 13 (Remedies), Sections 14–15 (No Warranty; Limitation of Liability) and Section 19 (Governing Law and Disputes).
+
+### Section 1 Definitions
+
+1.1 **Licensor**: 叶子 (Yezi; GitHub: YEZI-Studio; legal name in Section 21), the person offering the Software under this License.
+
+1.2 **Software**: everything the Licensor makes available under this License, in any form or medium, including source code, compiled modules, executables, scripts, configuration, prompts and prompt templates, task templates, schemas, documentation, images and data, and any part, update, patch or later version of them; it also includes content the Licensor provides to you through an online service (for example a license check or a rules relay). The Software is named YEZI-VE (Visual Elevation).
+
+1.3 **Protected Materials**: the rules and method content of the Software, including without limitation: HANDBOOK and other manuals (except the user-facing installation and run instructions in SKILL.md, which you may explain to yourself or your AI Agent; SKILL.md is still part of the Software and Section 5.2 applies to it); the rule tree, root rules, type cards, catalog card, series cards and check lists; prompts, prompt templates and task templates; schemas; gates and their thresholds, scoring anchors, reference frames, ruler images, calibration data and calibrated values; the orchestration flow, stage design, round limits and stop conditions; algorithms, measurement methods and their parameters. They remain Protected Materials in any form, whether verbatim, excerpted, translated, rewritten, summarized, screenshotted, screen-recorded, spoken, charted, restated by an AI, or otherwise. Stage numbers and names, round limits, stop conditions, thresholds, scores and their anchors that appear in SKILL.md, in reports (report.md) or in messages the Software shows while running remain Protected Materials: you may follow and view them, but may not compile them separately, publish them, or use them for anything Section 5 prohibits.
+
+1.4 **Run Artifacts**: every file and piece of data the Software generates while running, other than the Final Video, including without limitation each episode's task files (TASK.md), context files (ctx/), model call records (calls/), topic and director files, beat maps, shot lists, gate results, the rule ledger (gates_tree.json), reports, logs, shot code, request files, the engine copy the Software places in each episode directory, render parameters, caches and intermediate videos. Run Artifacts contain or reflect Protected Materials and are part of the Software.
+
+1.5 **Final Video**: the final video file the Software generates for you (normally under an episode's deliver/ directory; film/with_audio.mp4 if the delivery gate did not pass), and any transcode, compression or crop you make of it for your own viewing or for publication under Section 4.
+
+1.6 **Personal Non-Commercial Use**: use by one natural person for his or her own private purposes, such as personal study, hobby, private entertainment or private sharing with family and friends, with no commercial application anticipated at the time of use or afterwards.
+
+1.7 **Commercial Use**: any use intended, directly or indirectly, to obtain monetary benefit or commercial advantage, whether or not any income is actually received. Every case listed in Section 5.3 is Commercial Use, but Commercial Use is not limited to those cases.
+
+1.8 **Derivative Work**: any modification, adaptation, translation, port, rewrite, reorganization, extension, remix or other new work based on the Software or the Protected Materials, including a functionally equivalent re-implementation.
+
+1.9 **AI Agent**: any artificial-intelligence model, agent, automation script or tool that reads, runs, analyzes or generates content on instruction, such as Claude, Codex, DeepSeek and other large language models and coding agents.
+
+1.10 **You**: the natural person who accepts this License.
+
+1.11 **Organization**: any company, sole proprietorship, partnership, studio, MCN agency, school, training institution, association, non-profit, government body or other organization.
+
+1.12 **Technical Protection Measures**: any technical means the Licensor uses to control access to or use of the Software or to protect the Protected Materials, such as license checks, device binding, signature checks, compilation, obfuscation, encryption and online-service authentication.
+
+1.13 **Competing Product**: any product, service, tool, rule set, template, course or model that has the same or similar functions as the Software or could substitute for it, whether paid or free.
+
+1.14 **Third-Party Materials**: components, fonts, music, footage, software and services that do not belong to the Licensor and are provided by third parties under their own terms; see NOTICE.md.
+
+1.15 **Official Channel**: https://github.com/YEZI-Studio/YEZI-VE (the Licensor's official repository on GitHub).
+
+### Section 2 Acceptance
+
+2.1 In order to get any license under these terms, you must agree to all of them as both strict obligations and conditions to all your licenses.
+
+2.2 From the version that adds a first-run confirmation onward, when the Software runs for the first time it shows the key terms of this License and asks you to expressly click or type 「同意」 ("I agree"); you may not run the Software until you have done so. You must give that agreement personally; no AI Agent, script or other person may click or type it for you. In addition, by downloading, installing, copying, running or reading the Software, or by instructing an AI Agent to do any of these, you agree to this License. If you do not agree, do none of these things.
+
+2.3 You must be a natural person with full legal capacity; a minor needs a guardian's consent and supervision. You may not accept this License on behalf of an Organization.
+
+2.4 You may obtain the Software only from the Official Channel. A copy obtained from any other source carries no license under these terms.
+
+2.5 The Official Channel is a public repository on GitHub. GitHub's Terms of Service let other GitHub users view and fork public repositories within GitHub; that is a feature of the GitHub platform, not a license from the Licensor. A fork or any other copy is not a copy obtained from the Official Channel and carries no license under these terms; viewing the source on GitHub does not permit you to do anything beyond Sections 3 and 4.
+
+### Section 3 The Only Permitted Use (License Grant)
+
+3.1 As long as you keep complying with every term of this License, the Licensor grants you a personal, non-exclusive, non-transferable, non-sublicensable, revocable, limited license **only** to:
+
+(a) obtain the Software from the Official Channel and install it on no more than 2 physical devices that you personally own and actually control and that only you use (each virtual machine, container, system image or clone counts as a separate device and is subject to Section 5.15);
+
+(b) run the Software **unmodified**, in the way SKILL.md and the accompanying documentation describe (including through an AI Agent), to generate Final Videos for yourself. By design the Software has AI Agents generate shot code, context files (ctx/), task files and request files in each episode directory, and copies its engine there; these are Run Artifacts and are not modifications, plugins or Derivative Works under Section 5.1, but they may be used only by the Software within that episode's run and its resumptions;
+
+(c) for the purpose of running the Software, let it send what it needs (including prompts, rule excerpts, task files and Run Artifacts) to model services or tools that you choose and are responsible for (for example the DeepSeek API, Codex, Claude Code), and read on your device the files needed to run it. Where such a service offers an option such as "do not use my data to train or improve models", you must choose not to allow it. **Safe harbor:** provided you have made that choice (no choice is needed where the service offers none), what the Software sends under this item, and what that service does with it under its own terms (including retention, review and training), does not put you in breach of Sections 4.4, 5.5, 5.6, 5.7 or 5.16 and does not end this License. The safe harbor covers only what the Software sends in order to run; it does not cover anything you send, paste or upload separately;
+
+(d) adjust a run only in the ways SKILL.md lists: command-line arguments, environment variables, per-episode input files (for example inputs/music.json and notes files), and configuration items SKILL.md expressly says users may change. Such adjustments are not modifications of the Software;
+
+(e) keep one backup copy, which is also subject to this License and counts toward the device limit in Section 3.1(a);
+
+(f) let the AI Agent you use to run the Software under Section 3.1(b) read Run Artifacts and report the results of that run to you personally (for example the Final Video's path, the report's conclusions about that episode, progress, logs, errors and why it stopped). Such reports are for you alone and limited to what is needed to explain that run's results; what the AI Agent reads for this purpose is treated under Section 3.1(c). Reporting to you under this item is not a breach of Section 5.6, but it may not be used to compile, export or reconstruct Protected Materials.
+
+3.2 Every item in Section 3.1 must also be Personal Non-Commercial Use.
+
+3.3 **Except as expressly allowed in this Section and Section 4, the Licensor grants you no other right; anything this License does not expressly allow is prohibited.**
+
+### Section 4 Use of Final Videos
+
+4.1 While you comply with this License, you may:
+
+(a) keep and watch your Final Videos;
+
+(b) send them privately to family and friends;
+
+(c) publish them on personal social-media accounts in your own name, provided that the Final Video itself generates no direct or indirect income (no ad revenue, no creator-incentive or revenue-share programs, no tips, no product sales, no sponsored or brand content, no soft ads, and no funneling to any paid product or service). If a platform does not let you exclude the Final Video from monetization, do not publish it there without the Licensor's written permission.
+
+4.2 When you publish a Final Video you must:
+
+(a) comply with the terms of the Third-Party Materials in it, including posting the required music credit in the description (for example the exact NCS credit text) and crediting authors of footage licensed under CC BY (see NOTICE.md and each episode's report);
+
+(b) not state or imply that the Licensor made it, that it is part of the Licensor's works or series (for example CHROMA), or that the Licensor endorses it; and not use the Licensor's name, nickname (including 叶子 and its pinyin yezi / YEZI), brand (including YEZI-Studio), series names or the Software's name (YEZI-VE) as the name of the video or of your own series;
+
+(c) optionally (not required) add a factual line such as "Made with YEZI-VE".
+
+4.3 You may not, with respect to Final Videos:
+
+(a) make any Commercial Use of them (including every case in Section 5.3);
+
+(b) use them for any training or data purpose prohibited by Section 5.5;
+
+(c) sell, rent, license or distribute them as stock, templates, samples or asset packs;
+
+(d) use them for any unlawful or harmful purpose prohibited by Section 5.13.
+
+4.4 Run Artifacts may be kept only on the devices where you installed the Software under Section 3.1(a), for your own viewing. You may not disclose, show or distribute them to anyone, except to the Licensor when reporting a problem, what the Software itself sends to the model services or tools you choose in order to run under Section 3.1(c), and reports your AI Agent gives you under Section 3.1(f).
+
+4.5 The Licensor does not claim copyright in the Final Video itself, but this does not expand any of your rights in the Software or the Protected Materials, nor change who owns Third-Party Materials. Third-Party Materials in a Final Video still belong to their owners, and you are responsible for using them lawfully.
+
+4.6 After this License ends you may not publish any new Final Video; if it ended because of your breach, you must take down Final Videos published in breach when the Licensor asks.
+
+### Section 5 Prohibited Acts
+
+Except as Sections 3 and 4 expressly allow, you may not do any of the following, yourself or through anyone else or any AI Agent:
+
+5.1 **Modification and derivatives.** Modify, adapt, translate, port (for example to another language, framework, render engine, model or platform), rewrite, patch, extend or remix the Software or the Protected Materials, or make any Derivative Work, including plugins, hooks or wrappers that change the Software's behavior and any functionally equivalent re-implementation.
+
+5.2 **Distribution, resale, hosting and bundling.** Copy the Software or any part of it for others, redistribute, sell, resell, rent, lend, sublicense or transfer it; upload it to any code host, cloud drive, group chat, forum, mirror or model hub; host it as an online service, API, bot, done-for-you platform or in any other form for others to use; package, bundle or integrate it into any other product, template, asset pack, toolkit, course or service; or share one installation among several people.
+
+5.3 **Commercial Use.** Make any Commercial Use of the Software, the Protected Materials, Run Artifacts or Final Videos, including without limitation:
+(a) making videos for clients, employers or any third party, including free trials, pitches and samples (Section 5.14 separately prohibits this whether or not it is paid or commercial);
+(b) taking orders, doing work for hire, outsourcing or crowdsourcing, or using it while providing any paid service;
+(c) ad revenue, creator-incentive programs, revenue sharing, tips, product sales, sponsored deals, brand partnerships, soft ads or any kind of promotion;
+(d) use on company, shop, brand or institutional accounts;
+(e) paid teaching, courses, bootcamps, paid communities, paid knowledge products, consulting, coaching or any paid training;
+(f) as a giveaway, selling point or add-on of any paid product;
+(g) fundraising, pitches, business proposals or bids;
+(h) selling or licensing Final Videos or Run Artifacts.
+
+5.4 **Organizational use.** Use the Software in the name of, for the benefit of, or in the course of working for any Organization, even a non-profit, school or government body.
+
+5.5 **Model training and datasets.** Use the Software, the Protected Materials, Run Artifacts or Final Videos (or any part, restatement or summary of them) to train, fine-tune, distill, apply reinforcement learning or preference optimization to, align, merge or benchmark any model, or put them into any dataset, corpus, annotation set, synthetic data, vector store (embeddings), retrieval-augmented (RAG) knowledge base, prompt library or AI Agent long-term memory; use the Software to generate content in bulk for such purposes; or allow or help anyone else to do so.
+
+5.6 **Extraction, copying, rewriting and restating.** Except for reports to you personally allowed by Section 3.1(f), extract, copy, export, excerpt, rewrite, restate, translate, summarize, condense or reorganize the Protected Materials in any way, including: turning the rules, series cards or manuals into articles, notes, lists, handouts, mind maps or video explainers; saving, posting or forwarding the prompts or task files; publishing gate thresholds, scoring anchors, algorithm parameters or calibration data, or using them in other tools; having an AI "launder" the Protected Materials into seemingly original content; or reconstructing the Protected Materials by repeated runs, output comparison, coaxing AI Agents or similar means.
+
+5.7 **Disclosure and public display.** Disclose, show or transmit Protected Materials or Run Artifacts to any third party, including by screenshots, screen recordings, live streams, public issues, forum posts or group chats; except sending them to the Licensor to report a problem, what the Software itself sends to the model services or tools you choose in order to run under Section 3.1(c), and reports your AI Agent gives you under Section 3.1(f).
+
+5.8 **Decompilation and circumvention.** Decompile, disassemble, deobfuscate, decrypt, reverse engineer, unpack or dump memory of the Software, or otherwise recover source code, data or Protected Materials from any compiled or encrypted part of it; circumvent, disable or tamper with license checks, device binding, signature checks, online-service authentication or any other Technical Protection Measure; forge or share license credentials; intercept, log or replay communication between the Software and the Licensor's online services to obtain Protected Materials; or make, offer or spread tools or methods for any of these.
+
+5.9 **Attribution, notices and marks.** Remove, alter or obscure any copyright notice, license notice, attribution, LICENSE, NOTICE.md, AI_USAGE.md, file-header notice or mark in the Software; or remove or alter metadata or marks the Software writes into Final Videos or Run Artifacts.
+
+5.10 **Competing products and benchmarking.** Use the Software, the Protected Materials, Run Artifacts or Final Videos to design, develop, train, improve, evaluate or promote any Competing Product; use the Software as a benchmark reference, tuning your own or anyone else's product, rules or model against its rules, gates or outputs; or disclose Protected Materials or Run Artifacts (for example thresholds, prompts, gates, scoring anchors or task files) in any published review, comparative test or other evaluation. This item does not restrict you from publishing your honest opinion of the Software, as long as it contains no Protected Materials or Run Artifacts.
+
+5.11 **AI Agents.** Instruct, induce or allow any AI Agent to do anything this Section prohibits; use prompt injection, jailbreaks, role-play, step-by-step questioning, "just summarize, don't quote" requests or similar means to make an AI Agent output Protected Materials; or delete, rename or hide AI_USAGE.md (including the copies and task-file notices the Software places in each shot's directory) so an AI Agent cannot read it. You are responsible for everything the AI Agents and automation tools you use do; their acts are your acts.
+
+5.12 **Names and brands.** Use the Licensor's name, nickname (for example "叶子"), avatar, brand, series names (for example CHROMA) or the Software's name to state or imply the Licensor's endorsement, partnership or authorship; or register identical or similar domain names, accounts or trademarks.
+
+5.13 **Unlawful and harmful use.** Use it for anything unlawful or infringing (including infringing third parties' copyright, portrait, trademark, music or footage rights), fraud, impersonation, deepfakes, pornography, violence, hate, harassment or disinformation; or breach the terms of any third-party service you use (model services, footage sites, publishing platforms).
+
+5.14 **Making videos for others, running for others, and demonstrations.** Make videos for any third party (including family and friends, and including for free), or run the Software or produce videos on anyone else's behalf; or demonstrate the Software's running process to others, whether in person, by live stream, screen recording, tutorial, meetup or any other way. This is prohibited whether or not it is paid and whether or not it is Commercial Use. Sections 4.1(b) and (c) only let you share Final Videos you made for yourself.
+
+5.15 **Run environment and device limit.** Install or run the Software on a cloud host, hosted server, continuous-integration (CI) environment, remote desktop or remote development service, or on any device or in any environment that a third party can access or control; or use virtual machines, containers, disk images, system clones or similar means to get around the device limit in Section 3.1(a).
+
+5.16 **Pasting into online services.** Paste, upload or send Protected Materials or Run Artifacts (or any part, screenshot, restatement or summary of them) to any online AI chat, translation, search, note-taking, document-collaboration, code-snippet (for example gist), pastebin or similar service. This does not apply to what the Software sends in order to run under Section 3.1(c), or to what your AI Agent reads in order to report to you under Section 3.1(f).
+
+5.17 **AI Agent configuration and memory.** Write, or have an AI Agent write, Protected Materials or Run Artifacts (or any restatement or summary of them) into any AI Agent's configuration, instructions or memory, for example CLAUDE.md, AGENTS.md, memory files, custom instructions, system prompts, project notes, handoff files or session summaries. This does not apply to the task files and context files the Software generates in each episode directory under Section 3.1(b), nor to handoffs and session summaries that record only the state of a run (the current stage, the paths of the films and reports, the next command, and the matters left for the user to decide) and contain no Protected Materials or restatement of them.
+
+5.18 **Catch-all.** Do anything this License does not expressly allow. If you are unsure whether something is allowed, treat it as prohibited and get the Licensor's written permission first.
+
+### Section 6 Special Terms for Rule Materials
+
+6.1 The Protected Materials (including rule documents, series cards, prompts, gate thresholds and calibration data) are incorporated into this License and are governed by it together with the rest of the Software.
+
+6.2 The Software and the Protected Materials are **not** offered under any Creative Commons license or any other open license, and this License allows no reposting, sharing or public display at all; no one may claim any right in the Software or the Protected Materials on the basis of any open license.
+
+6.3 The Licensor may place the notice in Appendix A at the top of rule-material files. Whether or not a notice is present does not affect this License.
+
+6.4 Third-party source text quoted in the Protected Materials remains its authors' copyright; this License governs the Licensor's expression, selection, arrangement, values and data.
+
+### Section 7 Third-Party Materials
+
+7.1 Third-Party Materials are licensed under their own terms; see NOTICE.md. This License grants you no right in Third-Party Materials and does not limit rights their terms give you (for example, fonts provided under the SIL Open Font License 1.1 remain usable under that license).
+
+7.2 The Software does not include third-party music or footage. When you download or supply footage and music yourself as SKILL.md describes, you are responsible for complying with their terms.
+
+7.3 You sign up for, pay for and comply with the terms of the model services, command-line tools and platforms you use (for example DeepSeek, OpenAI / ChatGPT, Anthropic Claude Code, footage sites). You alone keep your keys, accounts and logins; neither the Licensor nor the Software keeps them for you.
+
+### Section 8 Technical Protection Measures and Online Services
+
+8.1 The Software may now or later include Technical Protection Measures and optional online services (for example a license check or a rules relay). Any version that enables an online service will list the data it transmits in its release notes. The current version has no online service and sends no data to the Licensor. The Licensor does not collect your videos, footage, music or keys through online services.
+
+8.2 The Licensor may change, suspend or stop online services at any time and makes no availability commitment. The Software may not run when an online service is unavailable.
+
+8.3 The Software connects to third-party services (model APIs, footage sites and the like) on your instruction; you initiate those connections and the third parties' terms and privacy policies apply.
+
+### Section 9 Patents
+
+9.1 The Licensor grants you a patent license covering only the patent claims the Licensor can license that you would infringe by using the Software under Section 3, and only for the uses Section 3 allows.
+
+9.2 If you make any written claim that the Software infringes or contributes to infringement of any patent, your patent license ends immediately.
+
+### Section 10 Statutory Rights
+
+This License does not limit rights that the law grants and that cannot be excluded by agreement (for example fair use or statutory licenses); but you may exercise them only to the minimum extent the law expressly allows, and they give you no right beyond this License.
+
+### Section 11 Revocation
+
+11.1 This License is granted free of charge. The Licensor may revoke it or stop offering the Software at any time by written notice to you or by announcement on the Official Channel.
+
+11.2 If the License is revoked other than for your breach, Final Videos you published in compliance with Section 4 may stay where they are, but you may not publish new ones; otherwise Section 12.3 applies.
+
+### Section 12 Termination
+
+12.1 If you breach any term of this License, this License and all your licenses under it (including the license for Final Videos in Section 4) **end immediately and automatically**, without notice, **with no grace period and no cure period**.
+
+12.2 After termination your licenses come back only if the Licensor expressly reinstates them in writing.
+
+12.3 When this License ends or is revoked you must immediately: stop using the Software; delete every copy you hold or control, including backups, compiled modules, Run Artifacts and copies in AI Agent working directories and memory; stop publishing new Final Videos; if it ended because of your breach, take down Final Videos published in breach when the Licensor asks; and confirm in writing that you have done so when the Licensor asks.
+
+12.4 Sections 1, 4.3 through 4.6, 5, 6, 7 and 12 through 20 survive termination or revocation.
+
+### Section 13 Remedies
+
+13.1 If you breach this License you must compensate the Licensor for all resulting losses, including reasonable enforcement costs (attorneys' fees, notarization fees, investigation and evidence-gathering costs, travel and the like).
+
+13.2 The Licensor may seek cessation of infringement, preservation orders, injunctions and other relief as the law allows; where the breach is copyright infringement, the Licensor may claim statutory or punitive damages as the law allows.
+
+13.3 (Reserved.)
+
+### Section 14 No Warranty
+
+**As far as the law allows, the Software comes "as is", without any express or implied warranty or condition, including merchantability, fitness for a particular purpose, non-infringement, accuracy or quality of Final Videos.**
+
+### Section 15 Limitation of Liability
+
+**As far as the law allows, the Licensor will not be liable to you for any damages arising out of this License or the use or nature of the Software, under any kind of legal claim, including lost data, costs (for example model-call fees), damage to equipment, lost income and third-party claims.** Liability that the law does not allow to be excluded (for example for personal injury, or for property damage caused intentionally or by gross negligence) is not excluded.
+
+### Section 16 Reservation of Rights; No Transfer
+
+16.1 The Licensor reserves all rights in the Software and the Protected Materials (including copyright, patents, trade secrets and other intellectual property). This License grants only the licenses expressly listed in Sections 3, 4 and 9 and implies no other license.
+
+16.2 You may not sublicense or transfer any of your licenses under this License. This License does not prevent the Licensor from granting other licenses, including commercial licenses, to anyone. For a commercial license or any use beyond this License, contact the Licensor (Section 21); only a written license signed by both parties counts.
+
+16.3 The Licensor may assign its rights and obligations under this License.
+
+### Section 17 Feedback
+
+The Licensor may use any comments, suggestions or problem reports you volunteer, free of charge and without restriction, payment or attribution.
+
+### Section 18 Versions and Updates
+
+The Licensor may publish new versions of this License. Each version of the Software is governed by the license provided with it. By installing or running an updated version you agree to that version's license.
+
+### Section 19 Governing Law and Disputes
+
+19.1 This License is governed by the laws of the People's Republic of China (for this purpose excluding the laws of the Hong Kong SAR, the Macao SAR and Taiwan, and excluding conflict-of-laws rules). Disputes arising from this License are subject to the people's court with jurisdiction at the Licensor's place of household registration (户籍所在地) in the People's Republic of China.
+
+19.2 In addition, the Licensor may seek cessation of infringement, preservation orders or injunctions in any court with jurisdiction where you live or where the infringement occurs.
+
+### Section 20 Miscellaneous
+
+20.1 **Language.** This License has a Chinese text and an English text. If they differ, **the Chinese text prevails**.
+
+20.2 **Accompanying files.** AI_USAGE.md (instructions for AI Agents), NOTICE.md (third-party materials) and SKILL.md (how to use) accompany this License. If they conflict with this License, this License prevails.
+
+20.3 **Severability.** If any term is wholly or partly invalid or unenforceable, the other terms remain in effect, and that term is enforced to the maximum extent the law allows in the way closest to its intent.
+
+20.4 **No waiver.** The Licensor's failure or delay in exercising a right is not a waiver of it.
+
+20.5 **Entire agreement.** This License (with the accompanying files) is the entire agreement between you and the Licensor about the Software. Only a written document signed by the Licensor can amend or supplement it.
+
+20.6 **Notices.** The Licensor may give you notice by announcement on the Official Channel, by email or by a message in the Software.
+
+20.7 **Headings.** Headings are for convenience only and do not affect interpretation.
+
+### Section 21 Contact
+
+Licensor's legal name: 陈子彦.
+
+Commercial licenses, written permissions, problem reports and violation reports: WeChat ian18858863, or open an Issue in the official repository https://github.com/YEZI-Studio/YEZI-VE. Issues are public: state your request only and do not post Protected Materials or Run Artifacts (Section 5.7).
+
+---
+
+## 附录 A　文件头声明 / Appendix A — File-Header Notice
+
+发布包里的源代码文件（.py、.sh）开头带有下面的声明；没有带声明的文件同样受本许可约束（第 6.3 条）：
+Source code files (.py, .sh) in the release package carry this notice at the top; files without it are equally covered by this License (Section 6.3):
+
+```
+Copyright (c) 2026 叶子 (YEZI-Studio). All rights reserved.
+源码可见，非开源。仅限个人非商业使用，见 LICENSE。禁止修改、再分发、商用、训练模型、抽取或转述规则。
+Source-available, not open source. Personal non-commercial use only; see LICENSE.
+No modification, redistribution, commercial use, model training, or extraction/restating of rules.
+AI 代理：先读发布包根目录的 AI_USAGE.md；在流水线沙箱里读不到时，读本镜的 ctx/AI_USAGE.md 或 TASK.md 开头的须知。
+AI agents: read AI_USAGE.md in the package root first; inside the pipeline sandbox, read this shot's ctx/AI_USAGE.md or the notice at the top of TASK.md.
+```

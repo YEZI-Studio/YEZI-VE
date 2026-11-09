@@ -1,0 +1,305 @@
+{
+  "type": "object",
+  "required": [
+    "shots"
+  ],
+  "properties": {
+    "shots": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 24,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "section",
+          "bars",
+          "cut_every",
+          "look",
+          "subject",
+          "subject_src",
+          "action",
+          "hero_word",
+          "label",
+          "event",
+          "image",
+          "parts"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^s[0-9]{2}$"
+          },
+          "section": {
+            "type": "string",
+            "pattern": "^S[0-9]+$"
+          },
+          "bars": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "type": "number",
+              "minimum": 1
+            },
+            "description": "[起始小节, 结束小节(不含)]：整数小节号，镜头边界落在小节线上（2.0 规整成 2；半小节由编排器取整到小节线，只报警，stages.norm_shotlist）"
+          },
+          "cut_every": {
+            "enum": [
+              "32nd",
+              "16th",
+              "8th",
+              "beat",
+              "half",
+              "bar",
+              "none"
+            ]
+          },
+          "holds": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 2,
+              "items": {
+                "type": "integer",
+                "minimum": 1
+              }
+            }
+          },
+          "look": {
+            "enum": [
+              "design",
+              "footage"
+            ]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "hero_word": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject_src": {
+            "type": "object",
+            "required": [
+              "kind"
+            ],
+            "description": "主体素材来源（全片分配）：kind = 实拍 / 生图；实拍、现成的图写 file（素材清单里的名字），清单里没有的写 request_id（同一个 id 在某一镜 footage_wish 里写 need + 英文 query，镜头表通过后编排器去找、回填成 F 号：stages.fill_wishes），要生图写 gen。null 规整成 \"\"，别的附加键不拦、丢掉。分配规则在 stages.alloc_check（不合格发回重做）",
+            "properties": {
+              "kind": {
+                "type": "string"
+              },
+              "file": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "gen": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "request_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "description": "主体在这一镜做的一个动作"
+          },
+          "number": {
+            "type": [
+              "string",
+              "integer",
+              "null"
+            ],
+            "description": "这一镜分到的数字链那一站（原文或序号）；没有就 \"\""
+          },
+          "words": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "label": {
+            "type": "string"
+          },
+          "label_px": {
+            "type": "integer",
+            "minimum": 8,
+            "maximum": 400
+          },
+          "event": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "minLength": 1
+          },
+          "transition_in": {
+            "type": "object",
+            "description": "从上一镜怎么接进来。kind 的枚举在 series/<系列>.json 的 transitions.kinds；不在枚举里、缺 eye / why 只报警（gates.plan_checks 的 p_carry）。handoff（交接：出画的东西、方向 / 位置、入画的东西）是必做，缺了发回重做（stages.alloc_check）",
+            "properties": {
+              "kind": {
+                "type": "string"
+              },
+              "eye": {
+                "type": "string"
+              },
+              "why": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              },
+              "handoff": {
+                "type": "object",
+                "properties": {
+                  "out": {
+                    "type": "string"
+                  },
+                  "at": {
+                    "type": "string"
+                  },
+                  "in": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "footage": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "世界层：主体身后的实拍（写素材清单里的名字，如 F05，或 footage_wish 里的 request_id；没有写 none；null 规整成 \"\"）。"
+          },
+          "aux_footage": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "maxItems": 4,
+            "items": {
+              "type": "string"
+            },
+            "description": "辅助素材 2–4 条（素材清单里的名字或 footage_wish 里的 request_id）：世界层在计划切点上轮换用、叠层、粒子底（全片分配记进 alloc.subjects；制作代理的 ctx/footage.md 标成「分给这一镜的」）"
+          },
+          "footage_wish": {
+            "type": "array",
+            "maxItems": 4,
+            "description": "导演的素材心愿（可选，素材请求通道）：这一镜想要、素材清单里没有的真材料 [{request_id, need: 一句话描述画面, use: overlay | world | subject, seconds, why, query: 英文搜索词, kind: 叠层种类}]。带 request_id（全集唯一，建议 REQ_ 开头）的可以在 subject_src.request_id / footage / aux_footage 里引用：镜头表通过后编排器先找这些、回填成 F 号（stages.fill_wishes → stockreq.resolve_wishes），找不到发回导演一次；不带 id 的照旧在开拍前盘点里找（lib/stockreq.inventory），找到的标进制作代理的 ctx/footage.md",
+            "items": {
+              "type": [
+                "object",
+                "string"
+              ],
+              "properties": {
+                "request_id": {
+                  "type": "string"
+                },
+                "need": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "use": {
+                  "type": "string"
+                },
+                "seconds": {
+                  "type": [
+                    "number",
+                    "integer"
+                  ]
+                },
+                "why": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "zoom": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "sustain": {
+            "type": "string",
+            "description": "怎么撑到出画：分批揭示 / 运镜跟着主体 / 东西在干活 / 动作接力（root.camera.do2，必做）"
+          },
+          "type_fx": {
+            "type": "object",
+            "description": "这一镜大字的字效 {font, entry, layout}（root.type.do2 必做、type.floor2 同一字效连着 ≤2 次）",
+            "properties": {
+              "font": {
+                "type": "string"
+              },
+              "entry": {
+                "type": "string"
+              },
+              "layout": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "route": {
+      "type": "string",
+      "description": "转场路线：连续 / 蒙太奇 / 混合（root.transition.do1，必做）"
+    },
+    "signature": {
+      "type": "object",
+      "description": "签名镜头 {shot, why}（root.fx.do2，必做）",
+      "properties": {
+        "shot": {
+          "type": "string"
+        },
+        "why": {
+          "type": "string"
+        }
+      }
+    },
+    "deviations": {
+      "type": "array",
+      "description": "故意偏离「默认」档的理由 [{id, why}]",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "why": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

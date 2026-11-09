@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "required": ["items"],
+  "description": "看图确认（stages.fill_wishes 的 shotlist_check）：回填进镜头的实拍逐条判。id = request_id（REQ_x）或镜头号（sNN：当主体用的开题 F 号）",
+  "properties": {
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "verdict"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1},
+          "verdict": {"enum": ["ok", "reject", "missing"]},
+          "query": {"type": ["string", "null"], "description": "reject / missing 时新的英文搜索词（编排器按它再找一次）"},
+          "route": {"type": ["string", "null"], "description": "清单里的 F 号（整格只写 F 号，编排器直接回填），或给制作代理的一句建议"},
+          "why": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

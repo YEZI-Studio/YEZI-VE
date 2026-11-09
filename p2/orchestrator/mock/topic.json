@@ -1,0 +1,195 @@
+{
+ "candidates": [
+  {
+   "motif": "霓虹",
+   "title_cn": "霓虹",
+   "screen_title": "NEON",
+   "signature_color": {
+    "name": "霓虹粉",
+    "hex": "#FF3BD4"
+   },
+   "hero_object": "霓虹灯管招牌",
+   "number_ladder": [
+    {
+     "value": "1",
+     "unit": "cd/m²",
+     "what": "第一支灯管起辉",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "10",
+     "unit": "cd/m²",
+     "what": "一块招牌亮了",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "100",
+     "unit": "cd/m²",
+     "what": "半条街亮了",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "1000",
+     "unit": "cd/m²",
+     "what": "整条街亮了",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "5000",
+     "unit": "cd/m²",
+     "what": "整片街区亮了",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "20000",
+     "unit": "cd/m²",
+     "what": "整座城亮了",
+     "source": "mock：示例数据（不是实测）"
+    },
+    {
+     "value": "100000",
+     "unit": "cd/m²",
+     "what": "最亮的那一帧",
+     "source": "mock：示例数据（不是实测）"
+    }
+   ],
+   "lexicon": [
+    "NEON",
+    "GLOW",
+    "TUBE",
+    "SIGN",
+    "NIGHT",
+    "CITY",
+    "FLICKER",
+    "BUZZ",
+    "GAS",
+    "PINK",
+    "HALO",
+    "BEAM",
+    "SHINE",
+    "BRIGHT",
+    "STREET",
+    "RAIN",
+    "GLASS",
+    "WIRE",
+    "BLAZE",
+    "SPARKLE"
+   ],
+   "footage_needs": [
+    "雨夜街头霓虹倒影",
+    "霓虹灯管闪烁特写",
+    "城市夜景车流延时",
+    "玻璃灯管弯折工坊",
+    "湿地面霓虹反光",
+    "夜市招牌一排亮起"
+   ],
+   "why_new": "一路变亮；只给母题一种颜色（霓虹粉）"
+  },
+  {
+   "motif": "声",
+   "title_cn": "共振",
+   "screen_title": "RESONANCE",
+   "signature_color": {
+    "name": "酸绿",
+    "hex": "#B6FF3B"
+   },
+   "hero_object": "镀铬音叉",
+   "number_ladder": [
+    {
+     "value": "20",
+     "unit": "Hz",
+     "what": "人耳下限",
+     "source": "mock：物理手册"
+    },
+    {
+     "value": "440",
+     "unit": "Hz",
+     "what": "标准音 A",
+     "source": "mock：物理手册"
+    },
+    {
+     "value": "20000",
+     "unit": "Hz",
+     "what": "人耳上限",
+     "source": "mock：物理手册"
+    }
+   ],
+   "lexicon": [
+    "WAVE",
+    "HERTZ",
+    "PITCH",
+    "ECHO",
+    "BASS",
+    "TREBLE",
+    "PULSE",
+    "BOOM",
+    "SONIC",
+    "FORK",
+    "NODE",
+    "PEAK"
+   ],
+   "footage_needs": [
+    "音箱鼓膜振动慢动作",
+    "水面驻波",
+    "克拉尼图形"
+   ],
+   "why_new": "母题从发光换成振动"
+  },
+  {
+   "motif": "磁",
+   "title_cn": "磁暴",
+   "screen_title": "MAGNET",
+   "signature_color": {
+    "name": "极光绿",
+    "hex": "#3BFFB0"
+   },
+   "hero_object": "镀铬马蹄磁铁",
+   "number_ladder": [
+    {
+     "value": "0.00005",
+     "unit": "T",
+     "what": "地磁",
+     "source": "mock：物理手册"
+    },
+    {
+     "value": "1.5",
+     "unit": "T",
+     "what": "核磁共振",
+     "source": "mock：物理手册"
+    },
+    {
+     "value": "45",
+     "unit": "T",
+     "what": "最强稳态磁场",
+     "source": "mock：物理手册"
+    }
+   ],
+   "lexicon": [
+    "FIELD",
+    "TESLA",
+    "POLE",
+    "NORTH",
+    "SOUTH",
+    "FLUX",
+    "PULL",
+    "AURORA",
+    "STORM",
+    "CORE",
+    "IRON",
+    "ARC"
+   ],
+   "footage_needs": [
+    "铁粉沿磁力线排列",
+    "极光延时",
+    "磁流体尖刺"
+   ],
+   "why_new": "看不见的力，靠铁粉显形"
+  }
+ ],
+ "chosen": 0,
+ "reason": "mock：固定选第一个候选",
+ "category": "卡点炫技",
+ "category_why": "卖的是节奏和冲击：设计帧、实拍、霓虹灯管轮着上，拍上切，一个母题（霓虹）一路变亮",
+ "differs": "一路变亮：主角物是一节节亮起的霓虹灯管，颜色是霓虹粉",
+ "line_kind": "数值：亮度一路升高"
+}

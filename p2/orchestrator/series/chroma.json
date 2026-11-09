@@ -1,0 +1,336 @@
+{
+  "id": "chroma",
+  "name": "CHROMA",
+  "category": "卡点炫技",
+  "category_note": "规则树大类（p1/tree/目录卡.md：任务点名了系列 → 按系列卡归类；CHROMA = 卡点炫技）。开题环节照这个核对，类型卡 p1/tree/卡点炫技.md、tree.json 的 beat 层按它接进提示词和门禁",
+  "note": "系列配置：卡片段落别名、门禁阈值、引擎、零件清单、素材。路径相对根目录 yezi-ve/ 的上一级目录。阈值来源见 p1/series/检查项.md。",
+  "episodes": [],
+  "includes": {
+    "global": "yezi-ve/p1/series/全局.md",
+    "card": "yezi-ve/p1/series/chroma.md",
+    "checks": "yezi-ve/p1/series/检查项.md",
+    "root": "yezi-ve/p1/tree/根.md",
+    "catalog": "yezi-ve/p1/tree/目录卡.md",
+    "tree": "yezi-ve/p1/tree/tree.json"
+  },
+  "includes_note": "提示词用 {{rules:维度|档}} 从 tree.json 取根和类型卡的行（全局.md 的 10 条已并进 根.md）；type = 本集大类的类型卡（编排器按 topic.json 的大类自动指过去）",
+  "gates": {
+    "size": [
+      1920,
+      1080
+    ],
+    "fps": 60,
+    "duration_s": [
+      21,
+      27
+    ],
+    "calibration": "成片检测阈值按定稿片实测定：Light 切点 5.30/s、第 1 秒 8 格；点火 3.79/s、9 格；每秒切点掉到 1.4 就明显不行。检测会漏掉相似构图之间的切点，所以成片阈值比卡上的数略低；计划门禁（镜头表）用卡上原数。这几个只奖励数量的密度门（cuts_per_s_min、first_second_min、plan_cuts_per_s_min、plan_first_second_min、hits_per_s）只提醒，按音乐给：切点、卡点从实测音乐起音（music_map）里取，没起音的地方不切，不拿这些数凑；这些数也不写进给代理的提示词（gates.py 里已强制降成 warn）。",
+    "cuts_per_s_min": 3.75,
+    "first_second_min": 8,
+    "plan_cuts_per_s_min": 3.8,
+    "plan_first_second_min": 10,
+    "hits_per_s": [
+      4.6,
+      5.3
+    ],
+    "hits_too_busy": 7.9,
+    "still_eps": 0.0015,
+    "grey_p1_max": 0.12,
+    "grey_p99_min": 0.8,
+    "tone_sample": 6,
+    "grey_min_s": 1.5,
+    "colors_max": 2,
+    "colors_bin_min": 0.2,
+    "similar_max_s": 7,
+    "same_image_max": 2,
+    "label_px_min": 20,
+    "bpm": [
+      125,
+      155
+    ],
+    "cut_checks": {
+      "note": "切点像素检查：按镜头表每个切点帧 F 看 F±window；全部只报警。dip = 整屏近黑/近白的像素占比；blend = 某帧 ≈ 前后两帧按 0.2–0.8 混合（残差/两帧差）；carry = 对位类两侧 16×9 边缘能量格的相关 + 主体重心偏移（1080p 像素）。",
+      "window": 3,
+      "dip_frac": 0.9,
+      "dip_bounce": 0.5,
+      "blend_alpha": [
+        0.2,
+        0.8
+      ],
+      "blend_resid": 0.3,
+      "blend_min_diff": 0.06,
+      "carry_kinds": [
+        "对位",
+        "运动接运动",
+        "遮挡"
+      ],
+      "carry_corr_min": 0.3,
+      "carry_shift_px": 200,
+      "calibration": "实测（把检测到的切点全当成声明的对位切点）：Light 112 个切点 闪黑闪白 0、混帧 3、不连续 8；点火 101 个 1、1、17；基线经过白的淡变被抓到（混帧，残差 0.01）。"
+    },
+    "motion": {
+      "in_median_min": 6.0,
+      "in_median_note": "卡点炫技类型卡默认值：CHROMA 代表作镜内中位数 × 0.8（Light 8.45、点火 7.53 → 约 6.0）"
+    },
+    "loudness": {
+      "target_lufs": -14.0,
+      "tol_lu": 1.0,
+      "true_peak_max": -1.0,
+      "note": "根·配乐·底线③；Light −14.0 / 点火 −13.9 LUFS，真峰 −3.7 / −3.3 dBTP；试跑稿 v1 −4.2 LUFS、真峰 +5.5（没做标准化）"
+    }
+  },
+  "engine": {
+    "note": "每集复制一份 src 到 <集>/engine/src（源只读不动）；assets、tools 软链回源。",
+    "root": "yezi-ve/p2/chroma/engine",
+    "src": "yezi-ve/p2/chroma/engine/src",
+    "link": [
+      "assets",
+      "tools"
+    ],
+    "python": "yezi-ve/p2/chroma/.venv/bin/python",
+    "always": [
+      "@yezi-ve/p2/chroma/HANDBOOK.md",
+      "src/shots/ex_open.py",
+      "src/shots/ex_hit.py",
+      "src/shots/ex_vortex.py",
+      "src/fx/motif.py",
+      "src/kit/type.py"
+    ],
+    "always_note": "整镜示例是 ctx/example_shot.py（提示词组写在 prompts/example_shot.py，编排器按这一镜填素材号、叠层 kind、帧号）"
+  },
+  "parts": {
+    "impact": {
+      "files": [
+        "src/fx/impact.py",
+        "src/shots/ex_hit.py"
+      ],
+      "what": "冲击帧：SR.hit 蓄力 → 冲击（post3_blue / duo_blue / lines / half_blue / voronoi / kick）→ 余波；SR.card 只要冲击帧的样子。冲击帧盖在新构图上，闪完不回到旧构图（kick 预设只推一下、画面不换，当不了「重」帧的整屏事件）"
+    },
+    "kaleido": {
+      "files": [
+        "src/fx/kaleido.py",
+        "src/shots/ex_vortex.py"
+      ],
+      "what": "万花筒「时光穿梭」：段落之间的转场；也可以在镜内当全屏图形场（KV.Vortex，单向越转越深，不来回）"
+    },
+    "mono_motif": {
+      "files": [
+        "src/fx/motif.py",
+        "src/fx/heat.py"
+      ],
+      "what": "单色世界：MO.palette 一个签名色派生全部颜色，MO.world 世界黑白只留母题色"
+    },
+    "camera": {
+      "files": [
+        "src/kit/fx.py"
+      ],
+      "what": "2.5D 运镜 fx.cam（单向推进 / 横移 / 甩）、模糊；抖只放在大卡点、8 帧内衰减（SR.hit / fx.shake）"
+    },
+    "auto_cam": {
+      "files": [
+        "src/fx/series.py"
+      ],
+      "what": "SR.auto_cam 虚拟摄影机（push/pull/pan/orbit…，一镜里单向走到底）；kick / six / drift 默认关，只在大卡点冲击一下（accents 默认 'hits'）"
+    },
+    "track": {
+      "files": [
+        "src/fx/series.py"
+      ],
+      "what": "SR.track 跟拍：主角钉住，有纹理的世界（Take 实拍 / MO.world 单色化的素材层）按 px/帧单向流过、分前后景视差，世界默认压暗略虚；每个计划切点换世界的素材或时段，主角不跳"
+    },
+    "element": {
+      "files": [
+        "src/fx/series.py"
+      ],
+      "alias": [
+        "叠层",
+        "overlay",
+        "elements"
+      ],
+      "what": "叠层 SR.element：黑底实拍元素去背景（ctx/overlays.json 列了这一集的 kind 和窗口）整屏单向飘 / 迎面推，或放到一点；冒充物质的东西只从这里或画面派生来"
+    },
+    "shatter": {
+      "files": [
+        "src/fx/series.py",
+        "src/fx/impact.py"
+      ],
+      "alias": [
+        "碎裂",
+        "shards"
+      ],
+      "what": "碎裂：SR.shatter 把这一帧画面本身按 Voronoi 碎开、单向张开露出下一张（不画裂线）；爆散、碎屑只从这里来"
+    },
+    "transition": {
+      "files": [
+        "src/fx/series.py",
+        "src/shots/parts_demo.py"
+      ],
+      "what": "设计转场 SR.tx（whip/push/pull/smear/spin/shape/circle/iris/stripes/blocks/hit）"
+    },
+    "type": {
+      "files": [
+        "src/kit/type.py"
+      ],
+      "what": "字体系统：Inter Display Black 主角字、Archivo Expanded 数字、DM Mono 标签"
+    },
+    "hero_type": {
+      "files": [
+        "src/kit/hero.py"
+      ],
+      "what": "HE.hero 主角字一生：slam / slab（弧光描边）/ card / knock"
+    },
+    "design": {
+      "files": [
+        "src/kit/design.py",
+        "src/fx/series.py"
+      ],
+      "what": "设计帧排版件：裁切标、十字、标签块（静的，不算会动的零件）；HUD 只许 ≤1.4 px 的细线、不圈主体"
+    },
+    "particles": {
+      "files": [],
+      "use": [
+        "element",
+        "shatter"
+      ],
+      "legacy": true,
+      "alias": [
+        "粒子"
+      ],
+      "what": "（旧零件名，不对镜头开放：SR.particles 是 2D 画的点和碎片，判为劣质特效）镜头表写了它的，按「叠层 element + 碎裂 shatter」给文件"
+    }
+  },
+  "transitions": {
+    "note": "转场声明：shotlist 每镜 transition_in = {kind, eye, why, slug}。kind 只收下面 8 种，不收闪黑、闪白、淡入淡出、叠化（全局 6）。不合规只报警，不拦。engine = 镜头代理用的引擎函数（HANDBOOK §9），parts = 要给代理的零件文件。",
+    "banned": [
+      "闪黑",
+      "闪白",
+      "黑场",
+      "白场",
+      "淡入",
+      "淡出",
+      "叠化",
+      "溶解",
+      "fade",
+      "dip to",
+      "dissolve",
+      "crossfade"
+    ],
+    "hard_cut_share_max": null,
+    "hard_cut_note": "拍上硬切占镜头之间切点的比例。CHROMA 以拍上硬切为主（镜头内的切点本来都是，切在音乐起音上），不设上限，只报告。",
+    "kinds": {
+      "拍上硬切": {
+        "slug": "cut-on-beat",
+        "say": "不加过渡，切在音乐的重音上；CHROMA 的主力（镜头内的切点都是），每一刀都要换来新东西",
+        "engine": "不用函数：切点就在重音那一帧（帧号照「本镜卡点」表，用 T.F >= F）；要劲就让冲击帧 SR.hit 盖在新构图上，或者主角字砸入（SR.kick 推一下不算卡点）",
+        "parts": []
+      },
+      "对位": {
+        "slug": "match-cut",
+        "say": "上一镜的形状、位置正好变成下一镜的东西（圆接圆、笔画接裂纹）",
+        "engine": "SR.tx(F, 'shape', at=上一镜的点, at_in=下一镜的点)；圆接圆 SR.tx(F, 'circle' | 'iris', c=圆心)",
+        "parts": [
+          "transition"
+        ]
+      },
+      "遮挡": {
+        "slug": "occlusion",
+        "say": "有东西从镜头前扫过把画面挡满，挪开时已是下一镜",
+        "engine": "SR.tx(F, 'occlude', dir='R')；设计感的 SR.tx(F, 'stripes' | 'blocks')",
+        "parts": [
+          "transition"
+        ]
+      },
+      "运动接运动": {
+        "slug": "direction-match",
+        "say": "动作或运动的方向、速度跨过切点接着走",
+        "engine": "SR.tx(F, 'smear' | 'ramp', dir=运动方向)；转着接 SR.tx(F, 'spin')（全片 ≤2 次）",
+        "parts": [
+          "transition"
+        ]
+      },
+      "甩": {
+        "slug": "whip-pan",
+        "say": "镜头猛甩成拖影，停下已是下一镜",
+        "engine": "SR.tx(F, 'whip', dir='L' | 'R' | 'U' | 'D')",
+        "parts": [
+          "transition"
+        ]
+      },
+      "推穿": {
+        "slug": "screen-dive",
+        "say": "一路推进穿过一个点（字的洞、光点），出来是下一镜",
+        "engine": "SR.tx(F, 'push', c=上一镜里推进的点)；反方向 SR.tx(F, 'pull')",
+        "parts": [
+          "transition"
+        ]
+      },
+      "冲击帧盖切点": {
+        "slug": "impact-match",
+        "say": "冲击帧那 1–3 帧盖住切点，余波里已是下一镜",
+        "engine": "SR.tx(F, 'hit', preset='post3_blue', c=(x, y), **MO.hit_cols(P))",
+        "parts": [
+          "transition",
+          "impact"
+        ]
+      },
+      "万花筒": {
+        "slug": "infinite-zoom",
+        "say": "画面折成万花筒越转越快，从中心的眼里钻出下一场；只用在段落之间",
+        "engine": "SR.tx(F, 'kaleido')；整镜做时光穿梭用 KV.Vortex（ex_vortex.py）",
+        "parts": [
+          "transition",
+          "kaleido"
+        ]
+      }
+    }
+  },
+  "music": {
+    "need": "节奏感强的 125–155 BPM，phonk 优先；一首顺到底，不拼接；只用音乐不加音效",
+    "file": "inputs/music.json",
+    "auto": "没有 inputs/music.json 时，从曲库（library）挑：推荐窗口在片长范围内、BPM 在范围里的曲子里，先挑 prefer_bpm_min 以上的，再挑低频对拍率最高的一首（暂定，你可换：改 inputs/music.json 后 --from 1 重做）",
+    "library": [
+      "曲库"
+    ],
+    "library_note": "曲库 = p2/assets/ 下的目录（默认 曲库），里面要有 beats.json 和 music/：你把有权使用的曲子放进 music/，再运行 p2/tools/music_lib.sh 生成节拍表（SKILL.md「自带配乐」）"
+  },
+  "assets": {
+    "note": "每个母题一个素材包 p2/assets/<母题>/（sources.json、overlays.json、footage/）：素材请求通道下载的实拍放在这里；母题还没有素材包也能开跑（空包起跑）",
+    "dir": "yezi-ve/p2/assets",
+    "flags": {},
+    "flags_note": "按素材文件名标 CG / 烧录字幕 / 备注（素材包 sources.json 条目自己写了 cg、burned_text、note 的优先）；inputs/footage.json 每条记 kind / cg / burned_text / kbps",
+    "rounds_per_shot": 3,
+    "rounds_per_shot_note": "一镜制作 / 返修各最多找几次素材（lib/stockreq.cfg；默认 3：代理看了 ctx/look/stock/ 的到货联系表，不对题就改写 need 再找；旧的 stock.rounds_per_shot 不再读）"
+  },
+  "stock": {
+    "note": "素材请求通道 + 开拍前素材盘点。lib/stockreq.py：代理在 work/out/footage_requests.json 提需求，编排器在沙箱外调 p2/tools/stock.py 找、下、入库（overlay 类自动烘焙进素材包 overlays.json），再叫代理一次接进去；开拍前按题材和镜头表盘点，缺的自动找，找不到的记进报告。只收免费授权（Pexels / Pixabay / Mixkit / CC0 / CC BY），要登录、付费的不碰。mock / STOCK_FAKE=1 用假站点（不联网），下到本集 stock_pack/。关掉：enabled=false 或环境变量 STOCK_OFF=1",
+    "enabled": true,
+    "per_shot": 3,
+    "per_film": 30,
+    "followup": true,
+    "inventory": true,
+    "inventory_max": 12,
+    "candidates": 12,
+    "pack_min_clips": 10,
+    "limits_note": "per_shot = 一镜每阶段（制作 / 返修）最多几条请求，一镜制作 / 返修各找几次在 assets.rounds_per_shot，per_film = 全片代理请求总数；inventory_max = 开题补世界层、开拍前盘点各最多补几条；pack_min_clips = 素材清单少于这么多条时按开题的 footage_needs 补世界层。合计上限 12 + 12 + 30 = 54 条，不低于 WORLD_MIN 30（一集实际用 40–52 条）",
+    "motif_needs": {},
+    "motif_needs_note": "按题材：母题素材包一个叠层都没有时，开拍前盘点按这里列的真材料种类去找（{\"母题\": [种类, …]}，种类名和 lib/stockreq.MATERIALS 一致；默认空）"
+  },
+  "fonts": [
+    {
+      "role": "主角大字（hero）",
+      "font": "Inter Display Black",
+      "file": "yezi-ve/p2/chroma/engine/assets/fonts/Inter.ttf"
+    },
+    {
+      "role": "宽体大字（wide）",
+      "font": "Archivo Expanded Black",
+      "file": "yezi-ve/p2/chroma/engine/assets/fonts/Archivo-ExpandedBlack.ttf"
+    },
+    {
+      "role": "数字 / 标签（mono）",
+      "font": "DM Mono Medium",
+      "file": "yezi-ve/p2/chroma/engine/assets/fonts/DMMono-Medium.ttf"
+    }
+  ],
+  "parts_note": "不许劣质特效：particles（SR.particles）、HUD 不再算会动的零件，换成 element（实拍叠层）。legacy = 旧零件名，不列给导演；use = 旧镜头表写了它时按哪几个零件给文件；alias = 镜头表里写中文名也认"
+}

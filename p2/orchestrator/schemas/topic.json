@@ -1,0 +1,161 @@
+{
+  "type": "object",
+  "required": [
+    "candidates",
+    "chosen",
+    "reason"
+  ],
+  "properties": {
+    "candidates": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "motif",
+          "title_cn",
+          "screen_title",
+          "signature_color",
+          "hero_object",
+          "number_ladder",
+          "lexicon",
+          "footage_needs",
+          "why_new"
+        ],
+        "properties": {
+          "motif": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 8
+          },
+          "title_cn": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 6
+          },
+          "screen_title": {
+            "type": "string",
+            "pattern": "^[A-Z0-9 °\\-\\.]+$"
+          },
+          "signature_color": {
+            "type": "object",
+            "required": [
+              "name",
+              "hex"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "hex": {
+                "type": "string",
+                "pattern": "^#[0-9A-Fa-f]{6}$"
+              }
+            }
+          },
+          "hero_object": {
+            "type": "string",
+            "minLength": 2
+          },
+          "number_ladder": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "object",
+              "required": [
+                "value",
+                "unit",
+                "what"
+              ],
+              "properties": {
+                "value": {
+                  "type": ["string", "number"],
+                  "minLength": 1,
+                  "description": "数字链这一站的数：写字符串或数字都收（数字由编排器规整成字符串，stages.norm_topic）"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "what": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "source": {
+                  "type": "string",
+                  "description": "出处一句（规则树 root.arc.do2：屏上的数字写出处；没写发回）"
+                }
+              }
+            }
+          },
+          "lexicon": {
+            "type": "array",
+            "minItems": 12,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "footage_needs": {
+            "type": "array",
+            "items": {
+              "type": [
+                "object",
+                "string"
+              ],
+              "required": [
+                "need",
+                "query"
+              ],
+              "properties": {
+                "need": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "query": {
+                  "type": "string",
+                  "minLength": 2
+                },
+                "use": {
+                  "type": "string"
+                },
+                "seconds": {
+                  "type": [
+                    "number",
+                    "integer"
+                  ]
+                }
+              }
+            },
+            "description": "需要的满屏实拍素材：每条 {need: 中文一句话, query: 英文搜索词, use: world | subject | overlay, seconds}（编排器优先用代理写的 query，stockreq.en_query 只兜底）；旧写法一句话字符串照收"
+          },
+          "why_new": {
+            "type": "string",
+            "minLength": 4
+          }
+        }
+      }
+    },
+    "chosen": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "reason": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "description": "大类（p1/tree/目录卡.md 五选一；系列已知大类的必须一致，stages 用 tree.topic_eval 查）"
+    },
+    "category_why": {
+      "type": "string"
+    },
+    "differs": {
+      "type": "string"
+    },
+    "line_kind": {
+      "type": "string"
+    }
+  }
+}

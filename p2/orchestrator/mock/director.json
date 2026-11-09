@@ -1,0 +1,129 @@
+{
+ "bible": {
+  "logline": "一路变亮：从一支灯管起辉到整条街的招牌全亮，最后亮回第 0 帧那张海报。",
+  "world": "黑白世界，只有霓虹是霓虹粉；白底大字设计帧和满屏实拍交替。",
+  "motif_ladder": "1 cd/m²（S2）→ 100 cd/m² → 5000 cd/m²（DROP 后）→ 100000 cd/m²（S5，全亮）。",
+  "sections_note": "S1 开头 10 格炸开；S2 灯管一支支亮；S3 蓄力到屏息；S4 DROP 整条街炸亮；S5 定成海报。",
+  "transitions": "段落之间用万花筒；段内用灯管形状对位、雨夜反光遮挡、冲击帧盖切点。",
+  "ending": "最后一击落在最后一小节第 1 拍，灯管海报慢推，最后一帧接回第 0 帧。",
+  "music": "配乐从曲库自动挑，一首顺到底。"
+ },
+ "beatmap": {
+  "bpm": 150,
+  "bars": 16,
+  "sections": [
+   {
+    "id": "S1",
+    "name": "HOOK",
+    "bars": [
+     1,
+     3
+    ],
+    "energy": "peak",
+    "purpose": "第 1 秒 10 格 + 片名"
+   },
+   {
+    "id": "S2",
+    "name": "GLOW",
+    "bars": [
+     3,
+     7
+    ],
+    "energy": "mid",
+    "purpose": "变亮阶梯 1 → 100 cd/m²"
+   },
+   {
+    "id": "S3",
+    "name": "BUILD",
+    "bars": [
+     7,
+     9
+    ],
+    "energy": "high",
+    "purpose": "主角物蓄力，屏息一拍"
+   },
+   {
+    "id": "S4",
+    "name": "DROP",
+    "bars": [
+     9,
+     13
+    ],
+    "energy": "peak",
+    "purpose": "5000 cd/m² 整条街炸亮"
+   },
+   {
+    "id": "S5",
+    "name": "POSTER",
+    "bars": [
+     13,
+     17
+    ],
+    "energy": "high",
+    "purpose": "全亮的那一帧定成海报，接回第 0 帧"
+   }
+  ],
+  "hits": [
+   {
+    "bar": 1,
+    "beat": 1,
+    "kind": "big",
+    "what": "片名 NEON 砸下"
+   },
+   {
+    "bar": 3,
+    "beat": 1,
+    "kind": "big",
+    "what": "1 cd/m² 霓虹数字"
+   },
+   {
+    "bar": 5,
+    "beat": 1,
+    "kind": "big",
+    "what": "雨夜反光炸开"
+   },
+   {
+    "bar": 7,
+    "beat": 1,
+    "kind": "big",
+    "what": "灯管入画"
+   },
+   {
+    "bar": 8,
+    "beat": 4,
+    "kind": "breath",
+    "what": "全片唯一一次屏息"
+   },
+   {
+    "bar": 9,
+    "beat": 1,
+    "kind": "drop",
+    "what": "招牌炸亮冲击帧"
+   },
+   {
+    "bar": 11,
+    "beat": 1,
+    "kind": "big",
+    "what": "5000 cd/m²"
+   },
+   {
+    "bar": 13,
+    "beat": 1,
+    "kind": "big",
+    "what": "万花筒进全亮"
+   },
+   {
+    "bar": 14,
+    "beat": 3,
+    "kind": "small",
+    "what": "灯管闪一下"
+   },
+   {
+    "bar": 16,
+    "beat": 1,
+    "kind": "final",
+    "what": "灯管海报"
+   }
+  ]
+ }
+}

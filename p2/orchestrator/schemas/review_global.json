@@ -1,0 +1,8 @@
+{
+  "type": "object", "required": ["issues", "verdict", "anchor_score", "anchor_why"],
+  "properties": {"issues": {"type": "array", "maxItems": 8, "items": {"type": "object", "required": ["rule", "where", "fix"],
+                   "properties": {"rule": {"type": "string"}, "where": {"type": "string"}, "fix": {"type": "string"}, "shot": {"type": "string"}}}},
+                 "verdict": {"type": "string"},
+                 "anchor_score": {"type": "number", "minimum": 0, "maximum": 10, "description": "按系列卡打：本系列定稿片 10、基线 2"},
+                 "anchor_why": {"type": "string"}}
+}

@@ -1,0 +1,78 @@
+{
+  "note": "编排器配置。模型、价格、每个环节的轮数上限都在这里改，不用改代码。",
+  "api": {
+    "kind": "openai",
+    "kind_note": "openai = /chat/completions（图放在 user 消息里）；anthropic = /anthropic/v1/messages",
+    "openai_base": "https://api.deepseek.com",
+    "anthropic_base": "https://api.deepseek.com/anthropic",
+    "model": "deepseek-flash",
+    "json_mode": true,
+    "json_mode_note": "OpenAI 接口加 response_format=json_object；接口报 400 时自动退回纯提示词（deepseek-flash 是否支持未实测）",
+    "timeout_s": 300,
+    "defaults": {"max_tokens": 8000, "temperature": null, "thinking": null, "max_retries": 2},
+    "stages": {
+      "topic": {"max_tokens": 6000},
+      "director": {"max_tokens": 12000},
+      "shotlist": {"max_tokens": 16000},
+      "keyframe_review": {"max_tokens": 6000},
+      "review": {"max_tokens": 8000}
+    }
+  },
+  "pricing": {
+    "input_miss": 0.30,
+    "input_hit": 0.006,
+    "output": 1.20,
+    "offpeak_factor": 0.5,
+    "peak_beijing": [["09:00", "12:00"], ["14:00", "18:00"]],
+    "source": "DeepSeek 官方定价页：北京时间工作日 9–12、14–18 高峰，其余错峰半价"
+  },
+  "agent": {
+    "claude_bin": "~/.local/bin/claude",
+    "cli_model": "deepseek-flash[1m]",
+    "effort": "max",
+    "autocompact": "786432",
+    "env": {
+      "ANTHROPIC_BASE_URL": "https://api.deepseek.com/anthropic",
+      "ANTHROPIC_MODEL": "deepseek-flash[1m]",
+      "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-flash[1m]",
+      "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-flash[1m]",
+      "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-flash",
+      "CLAUDE_CODE_SUBAGENT_MODEL": "deepseek-flash",
+      "CLAUDE_CODE_SUBAGENT_MODEL_FORCE": "1"
+    },
+    "timeout_min": {"keyframe": 60, "shot": 80, "fix": 60},
+    "max_turns": {"keyframe": 200, "shot": 250, "fix": 150},
+    "limits_note": "轮数、时长上限放得比较宽，只靠单集预算防失控",
+    "render_retries": 2,
+    "parallel": 4,
+    "parallel_note": "制作、返修几镜同时做（各镜目录独立；记账、日志、生图、渲染各自排队）。1 = 一镜一镜来"
+  },
+  "budget": {
+    "default_usd": 30,
+    "note": "单集累计上限，只防失控。命令行 --budget-usd / BUDGET=… 优先；没给就用这个"
+  },
+  "doctor": {
+    "path": "doctor.json",
+    "ttl_h": 24,
+    "cmd": "python3 -I ../tools/doctor.py",
+    "note": "环境体检结果（相对本目录）。开题时读 hints：footage_download、image_gen、notes；过了 ttl_h 小时先重跑"
+  },
+  "short": {
+    "note": "试跑短片模式（run_episode.py --short [N]，试跑只要 10–30 秒）：配乐窗口起点不变，只做前 bars 小节（铺垫 4 + DROP 后 4 ≈ 13.2 s）；片长门禁换成 duration_s；不做 5 秒样片和静帧代表帧；返修默认 max_rounds 轮（命令行 --max-rounds 优先）；镜头并行照 agent.parallel",
+    "bars": 8,
+    "duration_s": [10, 30],
+    "max_rounds": 2
+  },
+  "rounds": {
+    "note": "sample_rounds = 5 秒样片不过最多改几轮；keyframe_rounds = 0 不做静帧代表帧，>0 只做一次（只当参考）；review_votes = 全片审片独立打几次分取中位数；review_max_failed = 内部评分到线后最多容许几镜没过。返修轮数上限看命令行 --max-rounds（默认 3）",
+    "sample_rounds": 2,
+    "keyframe_rounds": 2,
+    "review_votes": 3,
+    "review_max_failed": 3,
+    "review_fix_rounds": 3
+  },
+  "review": {
+    "model": "deepseek-flash",
+    "note": "审片固定用这一个模型（lib/stages.review_llm）：不跟着制作的后端走（--backend codex 时审片也用它），不同后端、前后几轮的内部分数是同一把尺子。写死模型名，api.model 改了审片也不跟着变；\"deepseek\" = 跟 api.model，\"codex\" / \"codex:<模型>\" = 用 Codex。要换就改这里"
+  }
+}
